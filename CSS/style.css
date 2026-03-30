@@ -1,0 +1,210 @@
+/* ═══════════════════════════════
+   MASTER STYLESHEET — Explore the Cliffs
+   Auteur: HWUD04
+   Beschrijving: Alle stijlen voor de klimwebsite,
+   opgedeeld per slide/sectie.
+   Responsive: desktop → tablet → mobiel
+═══════════════════════════════ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden; }
+
+/* ═══════════════════════════════
+   ALGEMEEN — SLIDES
+═══════════════════════════════ */
+.slide {
+  width: 100vw; height: 100vh;
+  position: relative;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.slide-hidden { display: none !important; }
+
+/* ═══════════════════════════════
+   SLIDE 1 — HERO
+   clamp(min, voorkeur, max) zorgt voor vloeiend schalen
+   tussen schermformaten zonder harde breekpunten.
+═══════════════════════════════ */
+.banner__image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 40%, #718096 100%);
+}
+.banner__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.15); }
+.banner__circle {
+  position: absolute; top: 50%; left: -10vw;
+  transform: translateY(-50%);
+  width: clamp(300px, 65vw, 920px);
+  height: clamp(300px, 65vw, 920px);
+  background-color: #E8A87C; border-radius: 50%; opacity: 0.88;
+}
+.banner__content {
+  position: absolute; top: 50%; left: 8%;
+  transform: translateY(-50%); color: #fff; z-index: 10;
+  max-width: 480px;
+}
+.banner__title { font-size: clamp(2rem, 5.5vw, 5.5rem); font-weight: 600; line-height: 1.15; }
+.banner__subtitle { font-size: clamp(1rem, 2.2vw, 2.2rem); font-weight: 300; margin-top: 16px; opacity: 0.95; }
+.banner__cta {
+  display: inline-block; margin-top: clamp(20px, 5vh, 56px);
+  font-size: clamp(0.9rem, 1.5vw, 1.5rem); font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff; text-decoration: none;
+  border-bottom: 2.5px solid rgba(255,255,255,0.7);
+  padding-bottom: 4px; transition: opacity 0.2s;
+}
+.banner__cta:hover { opacity: 0.75; }
+
+/* ═══════════════════════════════
+   SLIDE 2 — INHOUDSOPGAVE
+   Flexbox layout: cirkels links, tekst rechts.
+═══════════════════════════════ */
+.contents { background: #000; display: flex; align-items: center; }
+.contents__circles { position: relative; width: 45vw; height: 100vh; flex-shrink: 0; }
+
+.circle-btn {
+  position: absolute; border-radius: 50%; overflow: hidden;
+  cursor: pointer; display: block; text-decoration: none;
+  width: clamp(140px, 20vw, 340px);
+  height: clamp(140px, 20vw, 340px);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease;
+}
+.circle-btn:hover { transform: scale(1.1); box-shadow: 0 12px 48px rgba(0,0,0,0.6); z-index: 20; }
+.circle-btn--1 { top: 5vh;  left: 3vw; }
+.circle-btn--2 { top: 33vh; left: 18vw; }
+.circle-btn--3 { top: 61vh; left: 3vw; }
+.circle-btn img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; background: #333; transition: transform 0.4s ease; }
+.circle-btn:hover img { transform: scale(1.08); }
+
+.contents__text { flex: 1; padding: clamp(30px, 8vh, 120px) clamp(20px, 8vw, 160px); color: #fff; }
+.contents__heading { font-size: clamp(2rem, 4.5vw, 5rem); font-weight: 700; margin-bottom: clamp(20px, 5vh, 60px); }
+
+.text-panel { display: none; }
+.text-panel.active { display: block; animation: fadeUp 0.3s ease forwards; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.text-panel__title { font-size: clamp(1rem, 1.8vw, 2rem); font-weight: 600; margin-bottom: 20px; cursor: pointer; display: inline-block; transition: opacity 0.2s; }
+.text-panel__title:hover { opacity: 0.7; }
+.text-panel__body { font-size: clamp(0.85rem, 1.1vw, 1.25rem); font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.85); }
+
+/* ═══════════════════════════════
+   SLIDE 3 — EMBED VIDEO
+   YouTube iframe, responsive container.
+═══════════════════════════════ */
+.slide--video {
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 4vh, 40px);
+}
+.slide--video h2 { color: #fff; font-size: clamp(1.4rem, 3vw, 3rem); font-weight: 700; }
+.video-wrap {
+  position: relative;
+  width: 80%;
+  height: 65%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+}
+.video-wrap iframe { width: 100%; height: 100%; border: none; }
+
+/* ═══════════════════════════════
+   SLIDE 4 — LEAFLET WEBKAART
+═══════════════════════════════ */
+.slide--map {
+  overflow: hidden;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#map {
+  width: 90%;
+  height: 80%;
+  z-index: 1;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════
+   SLIDE 5 — DETAILPAGINA'S
+═══════════════════════════════ */
+.detail { background: #000; display: flex; align-items: stretch; }
+.detail__circle-wrap { position: relative; width: 35vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; }
+.detail__circle {
+  width: clamp(180px, 28vw, 620px);
+  height: clamp(180px, 28vw, 620px);
+  border-radius: 50%; overflow: hidden; position: relative; left: -4vw; flex-shrink: 0;
+}
+.detail__circle img { width: 100%; height: 100%; object-fit: cover; background: #333; }
+.detail__content { flex: 1; padding: clamp(40px, 8vh, 100px) clamp(20px, 6vw, 140px); color: #fff; display: flex; flex-direction: column; justify-content: flex-start; }
+.detail__back {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: clamp(0.85rem, 1.1vw, 1.1rem); font-weight: 500; color: rgba(255,255,255,0.6);
+  text-decoration: none; margin-bottom: clamp(20px, 5vh, 60px);
+  cursor: pointer; background: none; border: none; transition: color 0.2s;
+}
+.detail__back:hover { color: #fff; }
+.detail__back::before { content: '←'; font-size: 1.3rem; }
+.detail__title { font-size: clamp(2rem, 4vw, 5rem); font-weight: 700; line-height: 1.1; margin-bottom: clamp(20px, 5vh, 60px); }
+.detail__text { font-size: clamp(0.85rem, 1.1vw, 1.2rem); font-weight: 300; line-height: 1.9; color: rgba(255,255,255,0.85); columns: 2; column-gap: 40px; }
+
+/* ═══════════════════════════════
+   MEDIA QUERIES — TABLET (max 1024px)
+   Aanpassingen voor schermen tussen 768px en 1024px.
+   Cirkels worden kleiner, layout blijft horizontaal.
+═══════════════════════════════ */
+@media (max-width: 1024px) {
+  .banner__circle { right: -20vw; }
+  .banner__content { right: 5%; }
+  .contents__circles { width: 50vw; }
+  .circle-btn--2 { left: 24vw; }
+  .detail__text { columns: 1; }
+  #map { width: 95%; height: 85%; }
+}
+
+/* ═══════════════════════════════
+   MEDIA QUERIES — MOBIEL (max 768px)
+   Volledige herindeling naar verticale layout.
+   Cirkels worden naast elkaar gezet bovenaan,
+   tekst en detail komen er verticaal onder.
+═══════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Hero — tekst gecentreerd */
+  .banner__content { right: 50%; transform: translate(50%, -50%); text-align: center; width: 90%; }
+  .banner__circle { width: 100vw; height: 100vw; right: -50vw; opacity: 0.4; }
+
+  /* Inhoudsopgave — verticaal */
+  .contents { flex-direction: column; justify-content: flex-start; scroll-snap-align: start; }
+  .contents__circles { width: 100vw; height: 45vh; }
+  .circle-btn { width: 28vw; height: 28vw; }
+  .circle-btn--1 { top: 5vw; left: 4vw; }
+  .circle-btn--2 { top: 5vw; left: 36vw; }
+  .circle-btn--3 { top: 5vw; left: 68vw; }
+  .contents__text { padding: 16px 24px 32px; width: 100%; }
+  .contents__heading { font-size: 1.8rem; margin-bottom: 16px; }
+
+  /* Detail — cirkel boven, tekst onder */
+  .detail { flex-direction: column; overflow-y: auto; }
+  .detail__circle-wrap { width: 100vw; height: 35vh; justify-content: center; }
+  .detail__circle { left: 0; width: 35vw; height: 35vw; }
+  .detail__content { padding: 20px 24px 40px; }
+  .detail__title { font-size: 2rem; margin-bottom: 16px; }
+  .detail__text { columns: 1; font-size: 0.9rem; }
+
+  /* Video */
+  .video-wrap { width: 95%; height: 50%; }
+
+  /* Kaart — volledig scherm */
+  #map { width: 100%; height: 88%; border-radius: 0; }
+}

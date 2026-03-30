@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore the Cliffs</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Eigen stylesheet -->
+  <link rel="stylesheet" href="CSS/style.css" />
+</head>
+<body>
+
+  <!-- ════════════════ SLIDE 1 — HERO ════════════════ -->
+  <div class="slide" id="slide1">
+    <img class="banner__image" src="Afbeeldingen/voorpagina-foto.jpg" alt="Achtergrond klif" />
+    <div class="banner__overlay"></div>
+    <div class="banner__circle"></div>
+    <div class="banner__content">
+      <h1 class="banner__title">Explore the cliffs</h1>
+      <p class="banner__subtitle">Live your dreams</p>
+      <a href="#slide2" class="banner__cta">Explore now</a>
+    </div>
+  </div>
+
+  <!-- ════════════════ SLIDE 2 — INHOUDSOPGAVE ════════════════ -->
+  <div class="slide contents" id="slide2">
+    <div class="contents__circles">
+      <a href="#" class="circle-btn circle-btn--1"
+         onmouseenter="showPanel('panel1')"
+         onclick="goToDetail('detail-rock'); return false;">
+        <img src="Afbeeldingen/rock-climbing.jpg" alt="Rock climbing" />
+      </a>
+      <a href="#" class="circle-btn circle-btn--2"
+         onmouseenter="showPanel('panel2')"
+         onclick="goToDetail('detail-ice'); return false;">
+        <img src="Afbeeldingen/ice-climbing.jpg" alt="Ice climbing" />
+      </a>
+      <a href="#" class="circle-btn circle-btn--3"
+         onmouseenter="showPanel('panel3')"
+         onclick="goToDetail('detail-rope'); return false;">
+        <img src="Afbeeldingen/climbing-safety.jpeg" alt="Touwwerk" />
+      </a>
+    </div>
+
+    <div class="contents__text">
+      <h2 class="contents__heading">Inhoudspagina</h2>
+
+      <div class="text-panel active" id="panel-default">
+        <h3 class="text-panel__title">Welkom</h3>
+        <p class="text-panel__body">
+          Welkom op de plek voor alles wat met klimmen te maken heeft. Of je nu de rotsen trotseert, 
+          bevroren watervallen beklimt of je techniek en veiligheid wilt verbeteren hier vind je inspiratie, 
+          kennis en praktische tips. Van rock climbing tot ice climbing en alles daartussenin, wij helpen je sterker, 
+          slimmer en vooral veiliger te klimmen. Ontdek de wereld van verticale uitdagingen en til je skills naar een hoger niveau.
+        
+        </p>
+      </div>
+
+      <div class="text-panel" id="panel1">
+        <h3 class="text-panel__title" onclick="goToDetail('detail-rock')">Lead klimmen →</h3>
+        <p class="text-panel__body">
+          Schaal de hoogste rotswanden en ontdek jouw grenzen. Of je nu beginner
+          bent of een ervaren klimmer, onze routes bieden uitdaging voor elk niveau.
+        </p>
+      </div>
+
+      <div class="text-panel" id="panel2">
+        <h3 class="text-panel__title" onclick="goToDetail('detail-ice')">Ijs klimmen →</h3>
+        <p class="text-panel__body">
+          Beklim bevroren watervallen in de meest ijzige omgevingen ter wereld.
+          Met de juiste uitrusting en begeleiding van onze experts maak je kennis
+          met spectaculair klimmen.
+        </p>
+      </div>
+
+      <div class="text-panel" id="panel3">
+        <h3 class="text-panel__title" onclick="goToDetail('detail-rope')">Touwwerk →</h3>
+        <p class="text-panel__body">
+          Leer de juiste touw- en zekertechnieken voor een veilige klimbeleving.
+          Onze instructeurs leren je stap voor stap hoe je jezelf en anderen kunt
+          beveiligen tijdens elke klim.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ SLIDE 3 — VIDEO EMBED ════════════════ -->
+  <div class="slide slide--video" id="slide-video">
+    <h2>Jules Marchaland in Magic Wood</h2>
+    <!-- YouTube video ingebed via embed-URL (geen watch?v= maar embed/) -->
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/nJA6f4HLAR4"
+        title="Jules Marchaland in Magic Wood"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ════════════════ SLIDE 4 — KAART ════════════════ -->
+  <div class="slide slide--map" id="slide-map">
+    <div id="map"></div>
+  </div>
+
+  <!-- ════════════════ SLIDE 5a — ROCK CLIMBING ════════════════ -->
+  <div class="slide detail slide-hidden" id="detail-rock">
+    <div class="detail__circle-wrap">
+      <div class="detail__circle">
+        <img src="Afbeeldingen/rock-climbing.jpg" alt="Rock Climbing" />
+      </div>
+    </div>
+    <div class="detail__content">
+      <button class="detail__back" onclick="goBack()">Terug</button>
+      <h2 class="detail__title">Rock climbing</h2>
+      <div class="detail__text">
+        <p>Rond het Mont Blanc massief vind je een enorme selectie aan sport en multipitch lead klimroutes, vooral op hoogwaardig graniet. 
+          In tegenstelling tot alpiene beklimmingen van de top zelf, draait het hier om technische lijnen, goed behaakte routes en indrukwekkende wanden met relatief goede toegang.
+        </p>
+        <h2 class="detail__subtitle">De hotspots</h2>
+        <p>De absolute hotspot is Chamonix. Vanuit hier bereik je gebieden zoals de Aiguilles Rouges, waar je zonovergoten granietklimmen vindt met uitzicht op het massief. 
+          Populaire sectoren zoals Index en Brévent bieden routes van gemiddeld niveau tot behoorlijk technisch, vaak perfect geschikt voor lead klimmers die hun multipitch-ervaring willen uitbreiden.
+        </p>
+        <p>
+          Aan de overkant, hoog in het massief, liggen de beroemde graniettorens rond de Aiguille du Midi. Hier vind je langere, meer serieuze multipitch routes zoals de klassieke lijnen op de 
+          Cosmiques Arete en de Aiguille de Blaitière. Deze routes combineren technische klimmen met alpine exposure, maar blijven populair onder lead klimmers vanwege de relatief goede uitrusting 
+          en bereikbaarheid via liften.
+        </p>
+        <p>
+          Voor wie liever iets rustiger klimt, is Courmayeur een uitstekend alternatief. De zuidkant van het massief biedt zonnigere omstandigheden en vaak iets stabieler weer. 
+          Gebieden zoals Val Ferret en Val Veny hebben mooie sportklimsectoren en langere multipitch routes op solide rots, ideaal voor lead klimmers die drukte willen vermijden.
+        </p>
+        <h2 class="detail__subtitle">De klassiekers</h2>
+        <p>
+          Bekende klassiekers in de regio zijn onder andere “Rebuffat–Baquet” op de Aiguille du Midi en diverse routes rond de Grand Capucin, dat bekendstaat om zijn steile, 
+          esthetische lijnen op perfect graniet. Hier vind je uitdagende lead routes die tot de mooiste van Europa worden gerekend.
+        </p>
+        <p>
+          Klimmen rond Mont Blanc vraagt, zelfs op goed behaakte routes, om een degelijke alpiene mindset. Weersveranderingen, hoogte en routefinding spelen altijd een rol. Maar voor lead klimmers 
+          die op zoek zijn naar lange lijnen, technische uitdagingen en spectaculaire uitzichten, is dit gebied simpelweg ongeëvenaard.
+        </p>
+        <br/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ SLIDE 5b — ICE CLIMBING ════════════════ -->
+  <div class="slide detail slide-hidden" id="detail-ice">
+    <div class="detail__circle-wrap">
+      <div class="detail__circle">
+        <img src="Afbeeldingen/ice-climbing.jpg" alt="Ice Climbing" />
+      </div>
+    </div>
+    <div class="detail__content">
+      <button class="detail__back" onclick="goBack()">Terug</button>
+      <h2 class="detail__title">Ice climbing</h2>
+      <div class="detail__text">
+        <p>Ijsklimmen rond het Mont Blanc massief is voor veel klimmers dé ultieme winterervaring. Niet alleen vanwege de indrukwekkende omgeving, 
+          maar vooral door de unieke combinatie van bereikbaarheid, variatie en kwaliteit van het ijs. Waar je in andere gebieden vaak lang moet 
+          zoeken naar goede condities, vind je hier verspreid over verschillende valleien vrijwel altijd wel klimbare lijnen van hoog niveau.
+        </p>
+        <h2 class="detail__subtitle">Watervallen</h2>
+        <p>
+          Wat dit gebied zo aantrekkelijk maakt, is de enorme dichtheid aan klassieke routes. Vanuit Chamonix sta je binnen korte tijd aan de voet 
+          van iconische watervallen. Denk aan de bekende lijnen in de Vallée de Chamonix, waar sectoren zoals Les Moulins al decennialang geliefd 
+          zijn bij lead klimmers. Hier klim je technische, goed gevormde ijsroutes in een setting die zowel toegankelijk als spectaculair is.
+        </p>
+        <p>
+          Wie op zoek is naar langere en meer afgelegen klassiekers, trekt richting Argentière of Vallorcine. In deze gebieden vind je routes die net 
+          wat serieuzer aanvoelen, met minder drukte en een meer alpien karakter. Dit zijn de plekken waar je als lead klimmer echt ritme opbouwt en 
+          langere lijnen kunt klimmen in solide ijs.
+        </p>
+        <h2 class="detail__subtitle">De zuidkant</h2>
+        <p>
+          Aan de zuidkant van het massief, rond Courmayeur en in de Valle d'Aosta, liggen misschien wel de meest esthetische ijsklimroutes van de regio. 
+          Hier zorgt de zon voor stabielere omstandigheden en prachtig gevormde watervallen. Het nabijgelegen Cogne is wereldberoemd en staat vol met 
+          klassiekers die elke ijsklimmer minstens één keer gedaan wil hebben.
+        </p>
+          De aantrekkingskracht van ijsklimmen rond Mont Blanc zit uiteindelijk in de combinatie van alles: de betrouwbaarheid van condities, de 
+          enorme keuze aan routes en de kans om legendarische klassiekers te klimmen in een van de mooiste berglandschappen ter wereld. Voor 
+          lead klimmers is het een plek waar je niet alleen beter wordt, maar ook echt begrijpt waarom ijsklimmen zo verslavend kan zijn.</p>
+        <br/>
+        
+      </div>
+    </div>
+    <!-- Animated GIF — verrijkt de pagina zonder storend te zijn -->
+    <div style="flex-shrink:0; width:340px; align-self:flex-end; margin-bottom:60px; margin-right:60px; border-radius:16px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.6);">
+      <img src="https://media.giphy.com/media/dmRPzXzXDlVVbhXfEH/giphy.gif" alt="Ice climbing animatie" style="width:100%; display:block;" />
+    </div>
+  </div>
+
+  <!-- ════════════════ SLIDE 5c — TOUWWERK ════════════════ -->
+  <div class="slide detail slide-hidden" id="detail-rope">
+    <div class="detail__circle-wrap">
+      <div class="detail__circle">
+        <img src="Afbeeldingen/climbing-safety.jpeg" alt="Touwwerk" />
+      </div>
+    </div>
+    <div style="flex:1; padding:80px 120px 80px 60px; color:#fff; display:flex; flex-direction:column; justify-content:center;">
+      <button class="detail__back" onclick="goBack()">Terug</button>
+      <h2 style="font-family:'Poppins',sans-serif; font-size:4.5rem; font-weight:700; line-height:1.1; margin-bottom:36px;">Safety while climbing</h2>
+      <div class="detail__text">
+        <p>
+          Touwtechnieken en klimveiligheid leer je het beste in een gecontroleerde omgeving, onder begeleiding van ervaren instructeurs. 
+          In Nederland begint dat vaak in de klimhal, maar veel klimmers zetten al snel de stap naar buiten. Organisaties zoals de NKBV bieden 
+          een duidelijke leerlijn, van basis zekeren tot gevorderde multipitch en reddingstechnieken.
+        </p>
+        <h2 class="detail__subtitle">Leren in de praktijk</h2>
+        <p>
+          In de regio kun je bijvoorbeeld cursussen volgen in de Nederlandse klimhallen of via outdoorprogramma’s in de Ardennen. 
+          Denk aan multi-pitch cursussen waarin je leert standplaatsen bouwen, abseilen en veilig meerdere touwlengtes klimmen 
+          die essentieel zijn als je later in gebieden zoals Chamonix wilt klimmen.
+        </p>
+        <p>
+          Ook zijn er gespecialiseerde aanbieders die verder gaan richting alpiene technieken. Tijdens cursussen in de Alpen leer je bijvoorbeeld 
+          hoe je als touwgroep beweegt op ijs, rots en sneeuw, en hoe je omgaat met complexe situaties in het hooggebergte.
+        </p>
+        
+        <p>
+          Wat betreft veiligheid: klimmen staat bekend als een relatief veilige sport mits je de juiste technieken gebruikt. Ernstige ongevallen komen 
+          relatief weinig voor, en wanneer er iets misgaat, blijkt dat in de overgrote meerderheid van de gevallen (ongeveer 99%) te komen door menselijke fouten, 
+          zoals verkeerd inbinden of zekeren.
+        </p>
+        <h2 class="detail__subtitle">Verschillende disciplines</h2>
+        <p>
+          Er zijn veel verschillende klimdisciplines van sportklimmen en boulderen tot trad, multipitch en ijsklimmen en elk brengt zijn eigen risico’s met zich mee. 
+          Wanneer je kijkt naar ongevalsstatistieken, zie je duidelijke verschillen tussen deze disciplines. Zo gebeuren de meeste incidenten in sportklimmen 
+          en indoor klimmen vaak door zekering en touwfouten, terwijl in alpiene routes en ijsklimmen factoren zoals vallend gesteente, weersomstandigheden 
+          en routekeuze een grotere rol spelen.
+        </p>
+         <!-- SVG Datavisualisatie — gegenereerd via JavaScript in main.js -->
+        <div style="margin-bottom:40px;">
+        <svg id="rope-chart" viewBox="0 0 700 200" width="700" height="200">
+          <line id="rope-axis-y" x1="30" y1="10" x2="30" y2="175" stroke="white" stroke-width="2"/>
+          <line id="rope-axis-x" x1="30" y1="175" x2="690" y2="175" stroke="white" stroke-width="2"/>
+          <g id="rope-chart-labels"></g>
+          <path id="rope-chart-line" fill="none" stroke="#00E5D1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+        <p>
+          De aantrekkingskracht van het leren van deze technieken zit dus niet alleen in veiligheid, maar ook in zelfstandigheid. Hoe beter je touwtechniek, hoe 
+          groter je speelveld wordt: van sportklimmen tot lange multipitch routes en uiteindelijk alpiene beklimmingen. Het is de stap die van “klimmen” een echte 
+          bergsport maakt en die ervoor zorgt dat je met vertrouwen en conrole de wand in gaat.
+        </p>
+    </div>
+  </div>
+
+  <!-- Leaflet JS — altijd onderaan body laden, na de HTML elementen -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/esri-leaflet/dist/esri-leaflet.js"></script>
+  <!-- Eigen JavaScript -->
+  <script src="Scripts/main.js"></script>
+
+</body>
+</html>
