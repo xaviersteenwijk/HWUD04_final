@@ -121,6 +121,11 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
   height: clamp(180px, 28vw, 620px);
   border-radius: 50%; overflow: hidden; position: relative; left: -4vw; flex-shrink: 0;
 }
+detail {
+  min-height: 100vh; 
+  height: auto;        
+  overflow-y: auto;    
+}
 .detail__circle img { width: 100%; height: 100%; object-fit: cover; background: #333; }
 .detail__content { flex: 1; padding: clamp(40px, 8vh, 100px) clamp(20px, 6vw, 140px); color: #fff; display: flex; flex-direction: column; justify-content: flex-start; }
 .detail__back {
@@ -133,7 +138,8 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
 .detail__back::before { content: '←'; font-size: 1.3rem; }
 .detail__title { font-size: clamp(2rem, 4vw, 5rem); font-weight: 700; line-height: 1.1; margin-bottom: clamp(20px, 5vh, 60px); }
 .detail__text { font-size: clamp(0.85rem, 1.1vw, 1.2rem); font-weight: 300; line-height: 1.9; color: rgba(255,255,255,0.85); columns: 2; column-gap: 40px; }
-
+.detail__content {padding: clamp(32px, 6vh, 90px) clamp(20px, 5vw, 120px);
+}
 /* MEDIA QUERIES */
 @media (max-width: 1024px) {
   .banner__circle { right: -20vw; }
@@ -172,6 +178,19 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
 
   .video-wrap { width: 95%; height: 50%; }
 
- 
+ /* MEDIA QUERIES LAPTOP */
   #map { width: 100%; height: 88%; border-radius: 0; }
+  @media (max-height: 768px) {
+  .detail__content {
+    padding-top: clamp(20px, 3vh, 50px);    
+    padding-bottom: clamp(20px, 3vh, 50px);
+  }
+  .detail__title {
+    font-size: clamp(1.6rem, 3vw, 3.5rem);  
+    margin-bottom: clamp(12px, 2vh, 32px);
+  }
+  .detail__text {
+    font-size: clamp(0.78rem, 0.9vw, 1rem); 
+    line-height: 1.7;
+  }
 }
