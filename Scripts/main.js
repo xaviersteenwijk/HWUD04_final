@@ -1,22 +1,15 @@
-/* ═══════════════════════════════
-   MAIN.JS — Explore the Cliffs
-   Bevat: kaart, GeoJSON, iconen, grafiek, navigatie
-═══════════════════════════════ */
-
-// ─── LEAFLET KAART ─────────────────────────────────
+// LEAFLET KAART
 var map = L.map('map', {
   zoomControl: true,
   attributionControl: true
 }).setView([45.87, 6.95], 11);
 
-// Stamen Terrain tiles — professioneel wandelkaart uiterlijk
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
   attribution: '© OpenStreetMap © CARTO',
   maxZoom: 19
 }).addTo(map);
 
-// ─── TOUR DU MONT BLANC — ULTRA GEDETAILLEERDE ROUTE ──
-// 130+ coördinaten, nauwkeurig langs het echte pad
+// TOUR DU MONT BLANC 
 var tmbCoords = [
   [6.8696,45.9237],[6.8620,45.9190],[6.8530,45.9150],[6.8440,45.9110],
   [6.8320,45.9050],[6.8200,45.9000],[6.8100,45.8960],[6.7983,45.8900],
@@ -58,10 +51,8 @@ var tmbCoords = [
   [6.8696,45.9237]
 ];
 
-// Converteer [lon,lat] naar Leaflet [lat,lon]
 var tmbLatLng = tmbCoords.map(function(c) { return [c[1], c[0]]; });
 
-// Teken route als polyline
 var route = L.polyline(tmbLatLng, {
   color: '#c0392b',
   weight: 4,
@@ -80,8 +71,7 @@ route.bindPopup(
   '</div>'
 );
 
-// ─── TEKST LABELS OP DE KAART ─────────────────────
-// Functie om een label te maken met stip en naam
+// TEKST LABELS OP DE KAART 
 function maakLabel(naam, kleur) {
   var stip = kleur === 'rood'
     ? '<div style="width:10px;height:10px;background:#c0392b;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);margin:0 auto 4px;"></div>'
@@ -109,14 +99,11 @@ function maakLabel(naam, kleur) {
   });
 }
 
-// Alle punten komen exact overeen met coördinaten in de route
-
-// Start/eindpunt — zit in route op [6.8696, 45.9237]
+// Start/eindpunt
 L.marker([45.9237, 6.8696], {icon: maakLabel('Chamonix', 'rood')})
   .addTo(map)
   .bindPopup('<b>Chamonix-Mont-Blanc</b><br>Start & eindpunt TMB<br>1035m · Frankrijk');
 
-// Etappedorpen — exact op routepunten
 var etappes = [
   { ll:[45.8900, 6.7983], naam:'Les Houches',      info:'Etappe 1 · 1008m · Frankrijk' },
   { ll:[45.8208, 6.7269], naam:'Les Contamines',   info:'Etappe 2 · 1164m · Frankrijk' },
@@ -133,7 +120,6 @@ etappes.forEach(function(e) {
     .bindPopup('<b>' + e.naam + '</b><br>' + e.info);
 });
 
-// Bergpassen — exact op routepunten
 var passen = [
   { ll:[45.7200, 6.8000], naam:'Col de la Seigne', info:'2516m · Grens FR–IT' },
   { ll:[45.8900, 7.0650], naam:'Grand Col Ferret', info:'2537m · Grens IT–CH' },
@@ -145,17 +131,13 @@ passen.forEach(function(p) {
     .bindPopup('<b>' + p.naam + '</b><br>' + p.info);
 });
 
-// Mont Blanc — apart punt naast de route
 L.marker([45.8326, 6.8652], {icon: maakLabel('Mont Blanc 4808m', 'rood')})
   .addTo(map)
   .bindPopup('<b>Mont Blanc</b><br>4808m · Hoogste berg Europa');
 
-// Schaal toevoegen voor professionaliteit
 L.control.scale({ imperial: false, metric: true }).addTo(map);
 
-// ─── DATAVISUALISATIE — STAAFGRAFIEK KLIMONGEVALLEN ──
-// Bron: internationale klimstatistieken
-// Percentage ongevallen per klimdiscipline
+// GRAFIEK
 var GRAFIEK_DATA = [
   { label: 'Rotsklimmen',     waarde: 38, kleur: '#E8A87C' },
   { label: 'Alpinisme',       waarde: 27, kleur: '#7EC8E3' },
@@ -171,12 +153,11 @@ function tekenGrafiek() {
   var maxWaarde = 40; // Y-as loopt tot 40%
 
   var grafiekEl = document.getElementById('rope-chart');
-  // Leeg de SVG volledig en herbouw
   while (grafiekEl.firstChild) { grafiekEl.removeChild(grafiekEl.firstChild); }
 
   var ns = 'http://www.w3.org/2000/svg';
 
-  // ── Assen ──
+  // Assen 
   function lijn(x1,y1,x2,y2,kleur,dikte) {
     var l = document.createElementNS(ns,'line');
     l.setAttribute('x1',x1); l.setAttribute('y1',y1);
@@ -201,7 +182,6 @@ function tekenGrafiek() {
   // X-as
   grafiekEl.appendChild(lijn(offsetX, offsetY+svgH, offsetX+svgW, offsetY+svgH, 'white', 2));
 
-  // ── Y-as labels (0%, 10%, 20%, 30%, 40%) ──
   [0,10,20,30,40].forEach(function(pct) {
     var y = offsetY + svgH - (pct/maxWaarde)*svgH;
     grafiekEl.appendChild(lijn(offsetX-6, y, offsetX, y));
@@ -215,7 +195,6 @@ function tekenGrafiek() {
     grafiekEl.appendChild(hl);
   });
 
-  // ── Staven ──
   var barBreedte = 70;
   var spatie     = (svgW - data.length * barBreedte) / (data.length + 1);
 
@@ -224,7 +203,6 @@ function tekenGrafiek() {
     var x    = offsetX + spatie + i * (barBreedte + spatie);
     var y    = offsetY + svgH - barH;
 
-    // Staaf met afgeronde bovenkant
     var rect = document.createElementNS(ns,'rect');
     rect.setAttribute('x', x);
     rect.setAttribute('y', y);
@@ -235,25 +213,20 @@ function tekenGrafiek() {
     rect.setAttribute('opacity', '0.9');
     grafiekEl.appendChild(rect);
 
-    // Percentage boven de staaf
     grafiekEl.appendChild(tekst(x + barBreedte/2, y - 6, item.waarde+'%', 'middle', '#fff', 13));
 
-    // Label onder de X-as
     grafiekEl.appendChild(tekst(x + barBreedte/2, offsetY+svgH+18, item.label, 'middle', 'rgba(255,255,255,0.75)', 11));
   });
 
-  // ── Titel ──
   grafiekEl.appendChild(tekst(offsetX + svgW/2, offsetY - 2, 'Ongevallen per klimdiscipline (%)', 'middle', 'rgba(255,255,255,0.5)', 11));
 }
 
-// ─── NAVIGATIE ─────────────────────────────────────
-// Toon tekst panel bij hover op cirkel
+// NAVIGATIE 
 function showPanel(id) {
   document.querySelectorAll('.text-panel').forEach(function(p) { p.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
 }
 
-// Navigeer naar detailpagina, verberg alle andere slides
 function goToDetail(id) {
   ['slide1','slide2','slide-map','slide-video'].forEach(function(sid) {
     document.getElementById(sid).classList.add('slide-hidden');
@@ -265,7 +238,6 @@ function goToDetail(id) {
   if (id === 'detail-rope') { tekenGrafiek(); }
 }
 
-// Ga terug naar de inhoudsopgave
 function goBack() {
   document.querySelectorAll('.detail').forEach(function(s) { s.classList.add('slide-hidden'); });
   ['slide1','slide2','slide-map','slide-video'].forEach(function(sid) {
