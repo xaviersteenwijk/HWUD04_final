@@ -1,18 +1,8 @@
-/* ═══════════════════════════════
-   MASTER STYLESHEET — Explore the Cliffs
-   Auteur: HWUD04
-   Beschrijving: Alle stijlen voor de klimwebsite,
-   opgedeeld per slide/sectie.
-   Responsive: desktop → tablet → mobiel
-═══════════════════════════════ */
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden; }
 
-/* ═══════════════════════════════
-   ALGEMEEN — SLIDES
-═══════════════════════════════ */
+/* ALGEMEEN — SLIDES */
 .slide {
   width: 100vw; height: 100vh;
   position: relative;
@@ -22,11 +12,7 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
 }
 .slide-hidden { display: none !important; }
 
-/* ═══════════════════════════════
-   SLIDE 1 — HERO
-   clamp(min, voorkeur, max) zorgt voor vloeiend schalen
-   tussen schermformaten zonder harde breekpunten.
-═══════════════════════════════ */
+/* HERO */
 .banner__image {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -58,10 +44,7 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
 }
 .banner__cta:hover { opacity: 0.75; }
 
-/* ═══════════════════════════════
-   SLIDE 2 — INHOUDSOPGAVE
-   Flexbox layout: cirkels links, tekst rechts.
-═══════════════════════════════ */
+/* INHOUDSOPGAVE */
 .contents { background: #000; display: flex; align-items: center; }
 .contents__circles { position: relative; width: 45vw; height: 100vh; flex-shrink: 0; }
 
@@ -94,10 +77,7 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
 .text-panel__title:hover { opacity: 0.7; }
 .text-panel__body { font-size: clamp(0.85rem, 1.1vw, 1.25rem); font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.85); }
 
-/* ═══════════════════════════════
-   SLIDE 3 — EMBED VIDEO
-   YouTube iframe, responsive container.
-═══════════════════════════════ */
+/* EMBED VIDEO */
 .slide--video {
   background: #000;
   display: flex;
@@ -117,9 +97,7 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
 }
 .video-wrap iframe { width: 100%; height: 100%; border: none; }
 
-/* ═══════════════════════════════
-   SLIDE 4 — LEAFLET WEBKAART
-═══════════════════════════════ */
+/* LEAFLET WEBKAART */
 .slide--map {
   overflow: hidden;
   background: #111;
@@ -135,9 +113,7 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
   overflow: hidden;
 }
 
-/* ═══════════════════════════════
-   SLIDE 5 — DETAILPAGINA'S
-═══════════════════════════════ */
+/* DETAILPAGINA'S (rock climbing etc...) */
 .detail { background: #000; display: flex; align-items: stretch; }
 .detail__circle-wrap { position: relative; width: 35vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; }
 .detail__circle {
@@ -158,11 +134,7 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
 .detail__title { font-size: clamp(2rem, 4vw, 5rem); font-weight: 700; line-height: 1.1; margin-bottom: clamp(20px, 5vh, 60px); }
 .detail__text { font-size: clamp(0.85rem, 1.1vw, 1.2rem); font-weight: 300; line-height: 1.9; color: rgba(255,255,255,0.85); columns: 2; column-gap: 40px; }
 
-/* ═══════════════════════════════
-   MEDIA QUERIES — TABLET (max 1024px)
-   Aanpassingen voor schermen tussen 768px en 1024px.
-   Cirkels worden kleiner, layout blijft horizontaal.
-═══════════════════════════════ */
+/* MEDIA QUERIES */
 @media (max-width: 1024px) {
   .banner__circle { right: -20vw; }
   .banner__content { right: 5%; }
@@ -172,19 +144,14 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
   #map { width: 95%; height: 85%; }
 }
 
-/* ═══════════════════════════════
-   MEDIA QUERIES — MOBIEL (max 768px)
-   Volledige herindeling naar verticale layout.
-   Cirkels worden naast elkaar gezet bovenaan,
-   tekst en detail komen er verticaal onder.
-═══════════════════════════════ */
+/*  MEDIA QUERIES TELEFOON  */
 @media (max-width: 768px) {
 
-  /* Hero — tekst gecentreerd */
+  
   .banner__content { right: 50%; transform: translate(50%, -50%); text-align: center; width: 90%; }
   .banner__circle { width: 100vw; height: 100vw; right: -50vw; opacity: 0.4; }
 
-  /* Inhoudsopgave — verticaal */
+ 
   .contents { flex-direction: column; justify-content: flex-start; scroll-snap-align: start; }
   .contents__circles { width: 100vw; height: 45vh; }
   .circle-btn { width: 28vw; height: 28vw; }
@@ -194,7 +161,7 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
   .contents__text { padding: 16px 24px 32px; width: 100%; }
   .contents__heading { font-size: 1.8rem; margin-bottom: 16px; }
 
-  /* Detail — cirkel boven, tekst onder */
+ 
   .detail { flex-direction: column; overflow-y: auto; }
   .detail__circle-wrap { width: 100vw; height: 35vh; justify-content: center; }
   .detail__circle { left: 0; width: 35vw; height: 35vw; }
@@ -202,9 +169,9 @@ body { font-family: 'Poppins', sans-serif; background: #000; overflow-x: hidden;
   .detail__title { font-size: 2rem; margin-bottom: 16px; }
   .detail__text { columns: 1; font-size: 0.9rem; }
 
-  /* Video */
+
   .video-wrap { width: 95%; height: 50%; }
 
-  /* Kaart — volledig scherm */
+ 
   #map { width: 100%; height: 88%; border-radius: 0; }
 }
